@@ -1,0 +1,944 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Bupiliç | Fiyat Endeksi</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="Preview page of Metronic Admin Theme #1 for statistics, charts, recent events and reports" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/morris.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/jqvmap.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="~/css/components.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="~/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/darkblue.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/toastr.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <style>
+        .container, .container-lg, .container-md, .container-sm, .container-xl {
+            max-width: 100%;
+        }
+
+        .container, .container-lg, .container-md, .container-sm {
+            max-width: 100%;
+        }
+
+        .container, .container-md, .container-sm {
+            max-width: 100%;
+        }
+
+        .container, .container-sm {
+            max-width: 100%;
+        }
+
+        .container {
+            max-width: 100%;
+        }
+
+        .container {
+            max-width: 100%;
+        }
+
+        .container {
+            max-width: 100%;
+        }
+
+        .container {
+            max-width: 100%;
+        }
+
+        .navbar-brand {
+            padding-top: 0rem;
+            padding-bottom: 0rem;
+        }
+
+        .mt-auto, .my-auto {
+            margin-top: 0rem !important;
+        }
+    </style>
+    @RenderSection("styles", false)
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+    <div class="page-wrapper">
+        <!-- BEGIN HEADER -->
+        <div class="page-header navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <div class="page-header-inner ">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="@Url.RouteUrl("AnaSayfa")">
+                        <img src="~/image/logo2.png" style="height:50px" class="logo-default" />
+                    </a>
+                    <div class="menu-toggler sidebar-toggler">
+                        <span></span>
+                    </div>
+                </div>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span></span>
+                </a>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="true">
+                                <img alt="" class="img-circle" src="~/favicon.ico">
+                                <span class="username username-hide-on-mobile"> @User.FindFirst("Chunvan").Value </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-user"></i> Profilim
+                                    </a>
+                                </li>
+                                @*<li>
+                                    <a href="#">
+                                        <i class="icon-calendar"></i> Takvim
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-envelope-open"></i> Gelen Kutusu
+                                        <span class="badge badge-danger"> 3 </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-rocket"></i> Görevler
+                                        <span class="badge badge-success"> 7 </span>
+                                    </a>
+                                </li>*@
+                                <li class="divider"> </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-lock"></i> Oturumu Kilitle
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.RouteUrl("Cikis")">
+                                        <i class="icon-key"></i> Çıkış
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <li class="dropdown dropdown-quick-sidebar-toggler">
+                            <a href="@Url.RouteUrl("Cikis")" class="dropdown-toggle">
+                                <i class="icon-logout"></i>
+                            </a>
+                        </li>
+                        <!-- END QUICK SIDEBAR TOGGLER -->
+                    </ul>
+                </div>
+            </div>
+            <!-- END HEADER INNER -->
+        </div>
+        <!-- END HEADER -->
+        <!-- BEGIN HEADER & CONTENT DIVIDER -->
+        <div class="clearfix"> </div>
+        <!-- END HEADER & CONTENT DIVIDER -->
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <!-- BEGIN SIDEBAR -->
+                <div class="page-sidebar navbar-collapse collapse">
+
+                    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                        <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                        <!-- ul class page-sidebar-menu-hover-submenu eklenirse yana açılan menü oluşur -->
+                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                        <li class="sidebar-toggler-wrapper hide">
+                            <div class="sidebar-toggler">
+                                <span></span>
+                            </div>
+                        </li>
+                        <!-- END SIDEBAR TOGGLER BUTTON -->
+                        <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+                        <li class="sidebar-search-wrapper">
+                            <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                            <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+                            <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+                            <form class="sidebar-search" action="page_general_search_3.html" method="POST">
+                                <a href="javascript:;" class="remove">
+                                    <i class="icon-close"></i>
+                                </a>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <a href="javascript:;" class="btn submit">
+                                            <i class="icon-magnifier"></i>
+                                        </a>
+                                    </span>
+                                </div>
+                            </form>
+                            <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                        </li>
+                        <li class="nav-item start">
+                            <a href="@Url.RouteUrl("Anasayfa")" class="nav-link nav-toggle">
+                                <i class="icon-home"></i>
+                                <span class="title">Ana Sayfa</span>
+                                <span class="selected"></span>
+                                
+                            </a>
+                        </li>
+                        <li class="heading">
+                            <h3 class="uppercase">Departmanlar</h3>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-bookmark"></i>
+                                <span class="title">Canlı Faaliyetler</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Kesim Programı</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Kesim Saatlendirme</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Kümülatif Kesim Tablosu</span>
+                                    </a>
+                                </li>                           
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-group"></i>
+                                <span class="title">Üretim</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Stok Kartları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Chickway Raporu</span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Chickway Raporu </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Chickway Raporu İki Tarih Arası </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Chickway From Excel(Kümülatif) </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Chickway From Excel(Yetiştirici) </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Yetiştirici Tanım </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Üretim Raporları</span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Üretim Raporu(İki Tarih Arası) </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Vardiya Bazında Üretim Raporu </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Ortalama Koli Ağırlıkları </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Min-Max Koli Ağırlıkları </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Üretim Raporu(Tarih Detaylı) </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Rendering İadeleri Raporu </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Üretim Envanter Denklik Raporu </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Ürün Üretim Zamanları </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Üretim Randıman Hesabı </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Saatlere Göre Üretim Miktarları </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Optimizasyon Tablosu(Üretim Emri)</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Üretim Planlama</span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Üretim Planlama </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Sipariş Üretimini Hesapla </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="@Url.RouteUrl("UretimIzle")" class="nav-link ">
+                                        <span class="title">Üretim İzle Tüm Araçlar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Hat Bazında Üretim</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Ürün Reçete İşlemleri</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Devir Ürün Miktarları Güncelle</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Üretim İzle İlk 4 Araç</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Ürün Bandı Bazında Üretim İzle</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Sipariş Karşılama Oran</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Üretim Randıman Referansları</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="title">Sipariş - Sevkiyat</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Gelen Siparişler</span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Sipariş Listesi </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Cari - Ürün Sipariş Tablosu </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Sipariş Kayıt İşlemleri </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Toplu Sipariş Onay </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> İki Tarih Arası Ham Sipariş Miktarları </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Sipariş Dengesi ve Alternatif Ürün </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Ham Sipariş Durumu Cari Bazında </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Ham Siarpiş Durumu Grup Bazında </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Cari Sipariş - Risk Analizi </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Sipariş Karşılama Oran(Ürün Bazında Toplam) </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link"> Saatlere Göre Üretim Miktarları </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Sipariş Durumu Genel Dağılım </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Sipariş Karşılama Oran(2019) </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Sipariş Karşılama Oran(İki Tarih Arası) </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Optimizasyon  </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Şok Depo Envanter</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Şok Bekle Envanter</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Taze Depo Envanter </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Palet Barkodları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Sipariş Karşılama Oran</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Optimize Siparişler</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Envanter Denklik Raporu</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="@Url.RouteUrl("UretimIzle")" class="nav-link ">
+                                        <span class="title">Üretim İzle Tüm Araçlar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Üretim Raporu(İki Tarih Arası)</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Ürün Üretim Zamanları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Üretim Emir Tablosu</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Hat Bazında Üretim</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Chickway Raporu</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-desktop"></i>
+                                <span class="title">Kalite Konrol</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">DÖF İşlemleri</span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> İç Organ Değerleri </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Canlı Asım Kontrolleri </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Pençe Üretim Kontrol Verileri </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Sakatat Kontrol Verileri </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Su Hattı ve Dezenfeksiyon Kontrol </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Haşlama Kazanı Kontrol Verileri </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Taşlık Kontrol Verileri </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Pençe Kalite Kontrol Verileri(Ürün) </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Pençe Rendering Kontrol Verileri </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Tüy Alımı Zorlukları - Yetiştirici </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link"> Bıçak Sterilizasyon Sıcaklık Verileri </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Kesim Süreci Teknik Bilgi Verileri </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Hedef Planları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Ölçüm ve Analiz Raporları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Kesim Kalite Raporları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Ürün Sorunları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="elements_cards.html" class="nav-link ">
+                                        <span class="title">Sıcaklık Problemleri</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-dollar"></i>
+                                <span class="title">Satış Pazarlama</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Dönemsel Net Satışlar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Bayi Depo Envanteri</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Bayi Depo Envanteri - Kümülatif</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link nav-toggle">
+                                        <span class="title">Şok Depo/Üretim Raporu</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link nav-toggle">
+                                        <span class="title">Şok Depo Denklik Raporu</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link nav-toggle">
+                                        <span class="title">Fiyat Endeksi ve Net Satış Fiyat</span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Fiyatlar Endeksi </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="@Url.RouteUrl("FiyatEndeksi")" class="nav-link "> Dönemsel Ortalama Net Fiyatlar </a>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <a href="#" class="nav-link "> Aylara Göre Fiyatlar </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link nav-toggle">
+                                        <span class="title">Cari Sipariş - Risk Analizi</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link nav-toggle">
+                                        <span class="title">Son İşlem / Borç-Alacak</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link nav-toggle">
+                                        <span class="title">Fatura ve Mağaza Kod Listesi</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link nav-toggle">
+                                        <span class="title">Borç Alacak Raporu</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="#" class="nav-link nav-toggle">
+                                <i class="icon-wallet"></i>
+                                <span class="title">Mali İşler</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">İhracat / Evrak Kayıt</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-male"></i>
+                                <span class="title">İnsan Kaynakları</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Personel Listesi</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Personel Kartı</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Organizasyon Şeması</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">İş Başvuru Formları</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-heart"></i>
+                                <span class="title">İş Sağlığı ve Güvenliği</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">İş Yeri Kaza Tutanakları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">İş Başı Eğitim Raporları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">İş Yeri Risk Bölgeleri</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">İş Güvenliği Eğitimleri</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-gavel"></i>
+                                <span class="title">Teknik Ofis</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Makine ve Ekipmanlar</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Operatör / Teknisyen Tanım</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Bakım Programları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                     <a href="#" class="nav-link ">
+                                        <span class="title">Projeler</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">İş Planları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Arıza Raporları</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-money"></i>
+                                <span class="title">Satınalma</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Malzeme İstek Formu</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Malzeme İstek Listesi</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Ambar Stok Durumu</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Tedarikçi Listesi</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="fa fa-paperclip"></i>
+                                <span class="title">İdari İşler</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Araç Tanımları</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Sürücü Tanım</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Güvenlik Personeli</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Güvenlik Vardiya Planı</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Araç Giriş / Çıkış ve Ziyaret</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Güvenlik Olay Kayıt</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">İzinli Araçlar Listesi</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class=" fa fa-gear"></i>
+                                <span class="title">Genel İşlemler</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Günlük Faaliyet Raporu</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">Departman Bilgileri</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="#" class="nav-link ">
+                                        <span class="title">E-Posta Listesi</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- END SIDEBAR MENU -->
+                    <!-- END SIDEBAR MENU -->
+                </div>
+                <!-- END SIDEBAR -->
+            </div>
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- END CONTENT BODY -->
+    <!-- END CONTENT -->
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="page-footer-inner" style="float:left">
+            <a href="https://www.bupilic.com.tr/" target="_blank">Bupiliç Entegre A.Ş. © 2021</a>
+            &middot;
+            <a href="https://www.bupilic.com.tr/kvkk" target="_blank">KVKK Bilgilendirme</a>
+        </div>
+        <div class="page-footer-inner" style="float:right">
+            2021 &copy; Theme By IT Departman
+        </div>
+    </div>
+    <!-- END FOOTER -->
+    <!-- BEGIN CORE PLUGINS -->
+
+    <script src="~/js/jquery.min.js" type="text/javascript"></script>
+    <script src="~/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/js/js.cookie.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/js/moment.min.js" type="text/javascript"></script>
+    <script src="~/js/daterangepicker.min.js" type="text/javascript"></script>
+    <script src="~/js/morris.min.js" type="text/javascript"></script>
+    <script src="~/js/raphael-min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.waypoints.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.counterup.min.js" type="text/javascript"></script>
+    <script src="~/js/amcharts.js" type="text/javascript"></script>
+    <script src="~/js/serial.js" type="text/javascript"></script>
+    <script src="~/js/pie.js" type="text/javascript"></script>
+    <script src="~/js/radar.js" type="text/javascript"></script>
+    <script src="~/js/light.js" type="text/javascript"></script>
+    <script src="~/js/patterns.js" type="text/javascript"></script>
+    <script src="~/js/chalk.js" type="text/javascript"></script>
+    <script src="~/js/ammap.js" type="text/javascript"></script>
+    <script src="~/js/worldLow.js" type="text/javascript"></script>
+    <script src="~/js/amstock.js" type="text/javascript"></script>
+    <script src="~/js/fullcalendar.min.js" type="text/javascript"></script>
+    <script src="~/js/horizontal-timeline.js" type="text/javascript"></script>
+    <script src="~/js/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.flot.resize.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.flot.categories.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.easypiechart.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.vmap.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.vmap.russia.js" type="text/javascript"></script>
+    <script src="~/js/jquery.vmap.world.js" type="text/javascript"></script>
+    <script src="~/js/jquery.vmap.europe.js" type="text/javascript"></script>
+    <script src="~/js/jquery.vmap.germany.js" type="text/javascript"></script>
+    <script src="~/js/jquery.vmap.usa.js" type="text/javascript"></script>
+    <script src="~/js/jquery.vmap.sampledata.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="~/js/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/js/dashboard.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="~/js/layout.min.js" type="text/javascript"></script>
+    <script src="~/js/demo.min.js" type="text/javascript"></script>
+    <script src="~/js/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="~/js/quick-nav.min.js" type="text/javascript"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70.0-2014.11.23/jquery.blockUI.min.js"></script>
+    <script src="~/js/toastr.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    @RenderSection("Risk", false)
+    @RenderSection("scripts", false)
+    @await Component.InvokeAsync("ToastNotify")
+</body>
+</html>
+
